@@ -6,3 +6,23 @@
   text-decoration: none;
   box-sizing: border-box;
 }
+
+body {
+  font-family: "Segoe UI", sans-serif;
+  background-color: #f0f2f5;
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+h1 {
+  margin-bottom: 16px;
+}
+
+#seesawCanvas {
+  border: 1px solid #ccc;
+  background-color: #fff;
+}
