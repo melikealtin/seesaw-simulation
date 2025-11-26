@@ -3,6 +3,8 @@ export class Weight {
     this.radius = 20;
     this.x = x;
     this.weight = weightValue;
+    this.id = Date.now() + Math.random();
+    this.color = this.getColor(weightValue);
 
     this.isFalling = startFromTop;
 
@@ -14,6 +16,33 @@ export class Weight {
 
     this.restingY = -45;
     this.fallSpeed = 5;
+  }
+
+  getColor(weightValue) {
+    const colors = [
+      "#2C3E50",
+      "#E74C3C",
+      "#E67E22",
+      "#F39C12",
+      "#27AE60",
+      "#3498DB",
+      "#9B59B6",
+      "#D35400",
+      "#F1C40F",
+      "#34495E",
+    ];
+
+    const index = weightValue - 1;
+    const maxIndex = colors.length - 1;
+
+    if (index < 0) {
+      return colors[0];
+    }
+    if (index > maxIndex) {
+      return colors[0];
+    }
+
+    return colors[index];
   }
 
   update() {
@@ -35,15 +64,21 @@ export class Weight {
 
     if (isFalling === true) {
       drawY = this.currentY;
+
+      if (drawY > -40) {
+        return;
+      }
     } else {
       const halfWidth = boardWidth / 2;
       const offset = 5;
       drawY = -halfWidth - this.radius - offset;
     }
 
-    ctx.fillStyle = "#3498DB";
+    ctx.fillStyle = this.color;
     ctx.beginPath();
-    ctx.arc(relativeX, drawY, this.radius, 0, Math.PI * 2);
+    const startAngle = 0;
+    const endAngle = Math.PI * 2;
+    ctx.arc(relativeX, drawY, this.radius, startAngle, endAngle);
     ctx.fill();
 
     ctx.fillStyle = "#fff";

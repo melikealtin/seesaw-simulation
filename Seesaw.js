@@ -20,6 +20,11 @@ export class Seesaw {
   addWeight(x, weightValue, shouldDrop) {
     const weight = new Weight(x, weightValue, shouldDrop);
     this.weights.push(weight);
+
+    if (shouldDrop === false) {
+      this.calculateTargetAngle();
+    }
+
     return weight;
   }
 
@@ -114,14 +119,18 @@ export class Seesaw {
     return total;
   }
 
+  reset() {
+    this.weights = [];
+    this.currentAngle = 0;
+    this.targetAngle = 0;
+  }
+
   draw(ctx) {
     this.drawBase(ctx);
 
     ctx.save();
-
     const angleInDegrees = this.currentAngle;
     const angleInRadians = (angleInDegrees * Math.PI) / 180;
-
     ctx.rotate(angleInRadians);
     this.drawBoard(ctx);
 
@@ -152,7 +161,6 @@ export class Seesaw {
       this.BOARD_LENGTH,
       this.BOARD_WIDTH
     );
-
     ctx.fillStyle = "#3E2723";
     ctx.fillRect(-2, -this.BOARD_WIDTH / 2, 4, this.BOARD_WIDTH);
   }
