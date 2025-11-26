@@ -15,6 +15,7 @@ export class CanvasScene {
     this.nextWeight = this.getRandomWeight();
 
     this.setupClickListener();
+    this.updateDashboard();
     this.startAnimationLoop();
   }
 
@@ -37,7 +38,6 @@ export class CanvasScene {
     const adjustedX = clickX * scaleX;
 
     const halfBoard = this.seesaw.BOARD_LENGTH / 2;
-
     const boardX = adjustedX - this.centerX + halfBoard;
 
     if (boardX < 0 || boardX > this.seesaw.BOARD_LENGTH) {
@@ -47,12 +47,56 @@ export class CanvasScene {
     this.seesaw.addWeight(boardX, this.nextWeight, true);
 
     this.nextWeight = this.getRandomWeight();
+    this.updateDashboard();
+  }
+
+  updateDashboard() {
+    this.updateLeftWeight();
+    this.updateRightWeight();
+    this.updateNextWeight();
+    this.updateAngle();
+  }
+
+  updateLeftWeight() {
+    const element = document.getElementById("leftWeight");
+    if (!element) return;
+
+    const weight = this.seesaw.getLeftSideWeight();
+    const roundedWeight = weight.toFixed(1);
+    element.textContent = roundedWeight + " kg";
+  }
+
+  updateRightWeight() {
+    const element = document.getElementById("rightWeight");
+    if (!element) return;
+
+    const weight = this.seesaw.getRightSideWeight();
+    const roundedWeight = weight.toFixed(1);
+    element.textContent = roundedWeight + " kg";
+  }
+
+  updateNextWeight() {
+    const element = document.getElementById("nextWeight");
+    if (!element) return;
+
+    element.textContent = this.nextWeight + " kg";
+  }
+
+  updateAngle() {
+    const element = document.getElementById("tiltAngle");
+    if (!element) return;
+
+    const angle = this.seesaw.currentAngle;
+    const roundedAngle = angle.toFixed(1);
+    element.textContent = roundedAngle + "°";
   }
 
   startAnimationLoop() {
     const loop = () => {
       this.seesaw.updateWeights();
+      this.seesaw.updateAngle();
       this.render();
+      this.updateDashboard();
       requestAnimationFrame(loop);
     };
 
