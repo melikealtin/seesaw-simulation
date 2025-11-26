@@ -1,3 +1,5 @@
+import { CanvasScene } from "./CanvasScene.js";
+
 document.addEventListener("DOMContentLoaded", () => {
   const canvas = document.getElementById("seesawCanvas");
 
@@ -6,15 +8,5 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  const ctx = canvas.getContext("2d");
-
-  ctx.font = "20px Arial";
-  ctx.fillStyle = "#333";
-  ctx.textAlign = "center";
-  ctx.textBaseline = "middle";
-  ctx.fillText(
-    "seesaw simulation will be here",
-    canvas.width / 2,
-    canvas.height / 2
-  );
+  const scene = new CanvasScene(canvas);
 });
