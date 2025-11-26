@@ -7,9 +7,34 @@
     <link rel="stylesheet" href="main.css" />
   </head>
   <body>
-    <h1>Seesaw Simulation</h1>
+    <div class="container">
+      <div class="info-panel">
+        <div class="info-item">
+          <div class="info-label">Left Total</div>
+          <div class="info-value" id="leftWeight">0.0 kg</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Next Weight</div>
+          <div class="info-value" id="nextWeight">1 kg</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Right Total</div>
+          <div class="info-value" id="rightWeight">0.0 kg</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Tilt Angle</div>
+          <div class="info-value" id="tiltAngle">0.0°</div>
+        </div>
+      </div>
 
-    <canvas id="seesawCanvas" width="800" height="400"></canvas>
+      <div class="canvas-wrapper">
+        <canvas id="seesawCanvas" width="800" height="400"></canvas>
+      </div>
+
+      <button id="resetBtn" class="btn">Reset</button>
+
+      <div id="logContainer" class="log-container"></div>
+    </div>
 
     <script type="module" src="app.js"></script>
   </body>
