@@ -12,11 +12,46 @@ export class CanvasScene {
 
     this.seesaw = new Seesaw();
 
+    this.nextWeight = this.getRandomWeight();
+
+    this.setupClickListener();
     this.startAnimationLoop();
+  }
+
+  getRandomWeight() {
+    const random = Math.random() * 10;
+    const weight = Math.floor(random) + 1;
+    return weight;
+  }
+
+  setupClickListener() {
+    this.canvas.addEventListener("click", (event) => {
+      this.handleClick(event);
+    });
+  }
+
+  handleClick(event) {
+    const rect = this.canvas.getBoundingClientRect();
+    const clickX = event.clientX - rect.left;
+    const scaleX = this.canvas.width / rect.width;
+    const adjustedX = clickX * scaleX;
+
+    const halfBoard = this.seesaw.BOARD_LENGTH / 2;
+
+    const boardX = adjustedX - this.centerX + halfBoard;
+
+    if (boardX < 0 || boardX > this.seesaw.BOARD_LENGTH) {
+      return;
+    }
+
+    this.seesaw.addWeight(boardX, this.nextWeight, true);
+
+    this.nextWeight = this.getRandomWeight();
   }
 
   startAnimationLoop() {
     const loop = () => {
+      this.seesaw.updateWeights();
       this.render();
       requestAnimationFrame(loop);
     };
