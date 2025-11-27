@@ -28,9 +28,15 @@ I used class structure in this project because I think it models real life objec
 
 I used Canvas because it is very fast for animations. The seesaw moves and the weights fall down. Canvas makes it easy to control these drawings pixel by pixel. Also, functions like rotate and translate helped me to turn the seesaw from its center point.
 
+## Trade-offs and Limitations
+
+- The physics calculations were challenging. Calculating torque and balancing the seesaw required understanding formulas like `torque = weight × distance`. It took time to get the rotation angles right.
+- The simulation runs on `requestAnimationFrame` which depends on browser performance. On slower devices, the animation might not be as smooth.
+
 ## AI Usage
 
 - I got help from AI for Canvas drawing functions like `arc`, `rotate`, `translate`
+- AI assisted me with structuring the README documentation and project analysis
 
 ## Video Explanation
 
