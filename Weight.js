@@ -20,16 +20,16 @@ export class Weight {
 
   getColor(weightValue) {
     const colors = [
-      "#2C3E50",
-      "#E74C3C",
-      "#E67E22",
-      "#F39C12",
-      "#27AE60",
-      "#3498DB",
-      "#9B59B6",
-      "#D35400",
-      "#F1C40F",
-      "#34495E",
+      "#ff6f91",
+      "#ff8aa6",
+      "#c9b9ff",
+      "#7a6f9b",
+      "#5b4b7a",
+      "#3c3a4a",
+      "#36334a",
+      "#2a2538",
+      "#d89b3a",
+      "#6aa38f",
     ];
 
     const index = weightValue - 1;

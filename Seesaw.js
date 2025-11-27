@@ -154,19 +154,56 @@ export class Seesaw {
   }
 
   drawBoard(ctx) {
-    ctx.fillStyle = "#5D4037";
+    ctx.fillStyle = "#d19a66";
     ctx.fillRect(
       -this.BOARD_LENGTH / 2,
       -this.BOARD_WIDTH / 2,
       this.BOARD_LENGTH,
       this.BOARD_WIDTH
     );
-    ctx.fillStyle = "#3E2723";
+    ctx.fillStyle = "#b67a3a";
     ctx.fillRect(-2, -this.BOARD_WIDTH / 2, 4, this.BOARD_WIDTH);
+
+    this.drawRuler(ctx);
+  }
+
+  drawRuler(ctx) {
+    const halfBoard = this.BOARD_LENGTH / 2;
+    const tickY = -this.BOARD_WIDTH / 2;
+
+    ctx.strokeStyle = "#5b4b7a";
+    ctx.fillStyle = "#5b4b7a";
+    ctx.font = "bold 8px Arial";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "bottom";
+
+    for (let i = -200; i <= 200; i += 50) {
+      const x = i;
+
+      ctx.beginPath();
+      ctx.moveTo(x, tickY);
+
+      let tickHeight = 4;
+      if (i === 0) {
+        tickHeight = 6;
+      }
+
+      ctx.lineTo(x, tickY - tickHeight);
+      ctx.lineWidth = 1;
+      ctx.stroke();
+
+      if (i !== 0) {
+        let label = i;
+        if (i < 0) {
+          label = i * -1;
+        }
+        ctx.fillText(label + "", x, tickY - tickHeight - 2);
+      }
+    }
   }
 
   drawBase(ctx) {
-    ctx.fillStyle = "#2C3E50";
+    ctx.fillStyle = "#5b4b7a";
     ctx.beginPath();
 
     const topY = this.BOARD_WIDTH / 2;
