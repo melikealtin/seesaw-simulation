@@ -64,16 +64,24 @@ export class Seesaw {
   }
 
   calculateTargetAngle() {
-    const totalMoment = this.calculateTotalMoment();
-    let angle = totalMoment * this.TILT_SENSITIVITY;
+    let leftTorque = 0;
+    let rightTorque = 0;
 
-    if (angle > this.MAX_TILT_ANGLE) {
-      angle = this.MAX_TILT_ANGLE;
-    }
-    if (angle < -this.MAX_TILT_ANGLE) {
-      angle = -this.MAX_TILT_ANGLE;
+    for (let i = 0; i < this.weights.length; i++) {
+      const weight = this.weights[i];
+
+      if (weight.isFalling === false) {
+        const distance = weight.x - this.centerPoint;
+
+        if (distance < 0) {
+          leftTorque = leftTorque + weight.weight * Math.abs(distance);
+        } else if (distance > 0) {
+          rightTorque = rightTorque + weight.weight * distance;
+        }
+      }
     }
 
+    const angle = Math.max(-30, Math.min(30, (rightTorque - leftTorque) / 10));
     this.targetAngle = angle;
   }
 
