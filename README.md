@@ -32,3 +32,7 @@ I used Canvas because it is very fast for animations. The seesaw moves and the w
 
 - I got help from AI for Canvas drawing functions like `arc`, `rotate`, `translate`
 - I got help from AI for torque calculation formula
+
+## Video Explanation
+
+[Watch the project walkthrough](https://drive.google.com/file/d/1PyNw8NBThU7FJe8MlhMBW25zSiqR58BA/view)
