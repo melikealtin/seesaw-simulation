@@ -1,4 +1,4 @@
-import { CanvasScene } from "./CanvasScene.js";
+import { CanvasScene } from "./models/CanvasScene.js";
 
 document.addEventListener("DOMContentLoaded", function () {
   const canvas = document.getElementById("seesawCanvas");
